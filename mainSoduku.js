@@ -10,12 +10,12 @@ const easy = [
     "--56---4--9--3---2--8---13--6-------18-----5-5-7---9--6---15----439--------76---4",
     "315672849496831572278549136964157328182396457537284961629415783743928615851763294"
   ];
-var cellSelect;
+var celSelect;
 var difficultyLevel = easy[0];
 var value = [""];
 let diffNum = 1;
 window.onload = function () {
-    startGame(); 
+    starGame(); 
 }
 function changeDifficultyLevel(n) {
     switch(n)
@@ -29,27 +29,27 @@ function changeDifficultyLevel(n) {
         default: window.difficultyLevel = easy[0];
     }
     diffNum = n;
-    startGame();
+    starGame();
 }
 function updateMove() {
-    if(cellSelect)
+    if(celSelect)
     {
         document.addEventListener('keydown', (event) => {
             var name = event.key;
             if(name>0 && name<10 && cani(name))
             {
-            cellSelect.textContent = name;
+            celSelect.textContent = name;
             addToArray(name);
             addToCache();          
             } else if(name==0){
-                cellSelect.textContent = null;
+                celSelect.textContent = null;
                 removeFromArray();
             }
           }, false);       
     }
     highSelect();
 }
-function startGame() {
+function starGame() {
     let board;    
     board = difficultyLevel;    
     fillAns(difficultyLevel);    
@@ -82,11 +82,11 @@ function highSelect() {
     qA(".cell")[i].classList.remove("highlighted");
     qA(".cell")[i].classList.remove("dup");
     }
-    let col = parseInt(cellSelect.id % 9);
-    let row = parseInt(cellSelect.id / 9);
-    let selectedCell = cellSelect.id;
+    let col = parseInt(celSelect.id % 9);
+    let row = parseInt(celSelect.id / 9);
+    let selectedCell = celSelect.id;
     for(let i=0;i<81;i++){
-        if(parseInt(cellSelect.textContent)==value[i])
+        if(parseInt(celSelect.textContent)==value[i])
         id(i).classList.add("dup");
     }
     for(let i=col;i<col+73;i+=9)
@@ -213,14 +213,14 @@ function emptyBoard(board) {
             cell.addEventListener("click", function(){
                 if(cell.classList.contains("selected")) {
                     cell.classList.remove("selected");
-                    cellSelect = null;
+                    celSelect = null;
                 } else {
                     for(let i=0;i<81;i++) {
                         qA(".cell")[i].classList.remove("selected");
                     }                  
                 }
                 cell.classList.add("selected");
-                cellSelect = cell;
+                celSelect = cell;
                 updateMove();
             }); 
         }
@@ -320,9 +320,9 @@ function endGame() {
 }
 function cani(num) {
     let pass = 1;
-    let col = parseInt(cellSelect.id % 9);
-    let row = parseInt(cellSelect.id / 9);
-    let selectedCell = cellSelect.id;
+    let col = parseInt(celSelect.id % 9);
+    let row = parseInt(celSelect.id / 9);
+    let selectedCell = celSelect.id;
     for(let i=col;i<col+73;i+=9)
     {
         if(num==value[i]){
